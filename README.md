@@ -9,4 +9,4 @@
 - José Zabdiel Delgado Espinoza.
 
 ## Planteamiento del proyecto
-//Aquí ira el planteamiento cuando tengamos el proyecto, jaja salu3.
+Nuestro proyecto consistirá en hacer un juego de tres en raya o gato, en donde el usuario jugará contra “la maquina” la cual decidirá sus jugadas con base en un árbol, el cual para saber su jugada se hará un recorrido BFS.
