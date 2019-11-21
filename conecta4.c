@@ -33,8 +33,8 @@ void imprimeTablero(char tablero[6][7]){
     }
 }
 bool check(char tablero[6][7], int color,int a1,int a2,int b1,int b2,int c1,int c2,int d1,int d2 ){
-  if (board[a1][a2]==board[b1][b2]&&board[b1][b2]==board[c1][c2]&&board[c1][c2]==board[d1][d2]&&board[a1][a2]!=' ')
-    return TRUE;
+  if (tablero[a1][a2]==tablero[b1][b2]&&tablero[b1][b2]==tablero[c1][c2]&&tablero[c1][c2]==tablero[d1][d2]&&tablero[a1][a2]==color)
+    return true;
   return false;
 }
 bool hor(char tablero[6][7], char color){
