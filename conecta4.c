@@ -5,8 +5,6 @@
 struct nodo {
 };
 
-bool gano(char tablero[6][7], int i, char color){
-}
 bool tirar(char tablero[6][7], char color, int columna){
     int i;
     columna--;
@@ -34,6 +32,60 @@ void imprimeTablero(char tablero[6][7]){
         printf("\n");
     }
 }
+bool check(char tablero[6][7], int color,int a1,int a2,int b1,int b2,int c1,int c2,int d1,int d2 ){
+  if (board[a1][a2]==board[b1][b2]&&board[b1][b2]==board[c1][c2]&&board[c1][c2]==board[d1][d2]&&board[a1][a2]!=' ')
+    return TRUE;
+  return false;
+}
+bool hor(char tablero[6][7], char color){
+  int j,k;
+  for (j = 0; j <6; j++) {
+    for (k = 0; k < 4; k++) {
+      if(check(tablero[6][7],color,j,k,j,k+1,j,k+2,j,k+3))
+        return true;
+    }
+  }
+  return false;
+}
+
+bool ver(char tablero[6][7], char color){
+  int j,k;
+  for (j = 0; j <3; j++) {
+    for (k = 0; k < 7; k++) {
+      if(check(tablero[6][7],color,j,k,j+1,k,j+2,k,j+3,k))
+        return true;
+    }
+  }
+  return false;
+}
+
+bool diader(char tablero[6][7], char color){
+  int j,k;
+  for (j = 0; j <3; j++) {
+    for (k = 0; k < 4; k++) {
+      if(check(tablero[6][7],color,j,k,j+1,k+1,j+2,k+2,j+3,k+3))
+        return TRUE;
+    }
+  }
+  return false;
+}
+bool diaizq(char tablero[6][7], char color){
+  int j,k;
+  for (j = 0; j < 3; j++) {
+    for (k = 3; k < 7; k++) {
+      if(check(tablero[6][7],color,j,k,j+1,k-1,j+2,k-2,j+3,k-3))
+        return TRUE;
+    }
+  }
+  return false;
+}
+
+bool gano(char tablero[6][7], char color){
+  if(hor(tablero[][],color)||ver(tablero[][],color)||diader(tablero[][],color)||diaizq(tablero[][],color))
+    return true;
+  return false;
+}
+
 int main()
 {
     char tablero[6][7];
@@ -45,12 +97,12 @@ int main()
         }
     }
     do{
-        if(tirar(tablero, 'R', 1)){
+        if(tirar(tablero[][], 'R', 1)){
             imprimeTablero(tablero);
         }else{
             continue;
         }
-    }while(gano(tablero, i, color));
+    }while(gano(tablero[][],color));
     getchar();
     return 0;
 }
