@@ -32,6 +32,57 @@ void imprimeTablero(char tablero[6][7]){
         printf("\n");
     }
 }
+
+/*Función para generar un árbol de jugadas*/
+struct nodo* generarJugadas(char tablero[6][7], int columna, int nivel, char color, struct nodo* padre){
+    struct nodo* hoja = (struct nodo*)malloc(sizeof(struct nodo));
+    if(hoja == NULL){
+        printf("Se acabo la memoria");
+        return NULL;
+    }
+    if(nivel == dificultad){
+        int i,j;
+        for(i = 0; i < 6; i++){
+            hoja->hijos[i] = NULL;
+            for(j = 0; j < 7; j++){
+                hoja->tablero[i][j] = tablero[i][j];
+            }
+        }
+        if(tirar(hoja->tablero, color, columna)){
+            hoja->valor = puntuarJugada(hoja->tablero, columna);
+            return hoja;
+        }else{
+            free(hoja);
+            return NULL;
+        }
+    }
+    int i,j;
+    for(i = 0; i < 6; i++){
+        for(j = 0; j < 7; j++){
+            hoja->tablero[i][j] = tablero[i][j];
+        }
+    }
+    if(tirar(hoja->tablero, color, columna)){
+        if(gano(hoja->tablero, color)){
+            for(i = 0; i < 6; i++){
+                hoja->hijos[i] = NULL;
+            }
+            return hoja;
+        }
+        for(i = 0; i < 7 ; i++){
+            if(nivel%2 == 0){
+                hoja->hijos[i] = generarJugadas(hoja->tablero, i, nivel+1, 'A', hoja);
+            }else{
+                hoja->hijos[i] = generarJugadas(hoja->tablero, i, nivel+1, 'R', hoja);
+            }
+        }
+        return hoja;
+    }else{
+        free(hoja);
+        return NULL;
+    }
+}
+
 /*Función para verificar si el jugador gano*/
 bool gano(char tablero[6][7], char color){
     int i,j;
