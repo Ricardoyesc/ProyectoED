@@ -32,60 +32,41 @@ void imprimeTablero(char tablero[6][7]){
         printf("\n");
     }
 }
-bool check(char tablero[6][7], int color,int a1,int a2,int b1,int b2,int c1,int c2,int d1,int d2 ){
-  if (tablero[a1][a2]==tablero[b1][b2]&&tablero[b1][b2]==tablero[c1][c2]&&tablero[c1][c2]==tablero[d1][d2]&&tablero[a1][a2]==color)
-    return true;
-  return false;
-}
-bool hor(char tablero[6][7], char color){
-  int j,k;
-  for (j = 0; j <6; j++) {
-    for (k = 0; k < 4; k++) {
-      if(check(tablero[6][7],color,j,k,j,k+1,j,k+2,j,k+3))
-        return true;
-    }
-  }
-  return false;
-}
-
-bool ver(char tablero[6][7], char color){
-  int j,k;
-  for (j = 0; j <3; j++) {
-    for (k = 0; k < 7; k++) {
-      if(check(tablero[6][7],color,j,k,j+1,k,j+2,k,j+3,k))
-        return true;
-    }
-  }
-  return false;
-}
-
-bool diader(char tablero[6][7], char color){
-  int j,k;
-  for (j = 0; j <3; j++) {
-    for (k = 0; k < 4; k++) {
-      if(check(tablero[6][7],color,j,k,j+1,k+1,j+2,k+2,j+3,k+3))
-        return TRUE;
-    }
-  }
-  return false;
-}
-bool diaizq(char tablero[6][7], char color){
-  int j,k;
-  for (j = 0; j < 3; j++) {
-    for (k = 3; k < 7; k++) {
-      if(check(tablero[6][7],color,j,k,j+1,k-1,j+2,k-2,j+3,k-3))
-        return TRUE;
-    }
-  }
-  return false;
-}
-
+/*Función para verificar si el jugador gano*/
 bool gano(char tablero[6][7], char color){
-  if(hor(tablero[][],color)||ver(tablero[][],color)||diader(tablero[][],color)||diaizq(tablero[][],color))
-    return true;
-  return false;
+    int i,j;
+    for(i = 0; i < 6; i++) {
+        for(j = 0; j < 4;j++) {
+            if (tablero[i][j] == color && tablero[i][j+1] == color && tablero[i][j+2] == color && tablero[i][j+3] == color)
+                return true;
+        }
+    }
+    for(i = 0; i < 3;i++) {
+        for(j = 0; j < 7; j++) {
+            if (tablero[i][j] == color && tablero[i+1][j] == color && tablero[i+2][j] == color && tablero[i+3][j] == color)
+                return true;
+        }
+    }
+    for(i = 0; i < 6; i++) {
+        for(j = 0; j < 7; j++) {
+            if (i+3 < 6 && j+3 < 7) {
+                if (tablero[i][j] == color && tablero[i+1][j+1] == color && tablero[i+2][j+2] == color && tablero[i+3][j+3] == color){
+                    return true;
+                }
+            }
+        }
+    }
+    for(i = 0; i < 6; i++) {
+        for(j = 0; j < 7; j++) {
+            if (i+3 < 6 && j-3>=0) {
+                if (tablero[i][j] == color && tablero[i+1][j-1] == color && tablero[i+2][j-2] == color && tablero[i+3][j-3] == color){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
-
 int main()
 {
     char tablero[6][7];
