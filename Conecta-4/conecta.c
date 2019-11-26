@@ -165,6 +165,112 @@ void generarJugadas(char tablero[6][7], int nivel, char color, struct nodo* padr
     }
 }
 
-int puntuarJugada(char tablero[6][7], int i){
-  return 8;
+int puntuarJugada(char tablero[6][7], char color){
+int score=0;
+//Score en Horizontal
+int x;
+int y;
+for (x = 0; x < 7; x++) {
+  for(y=0;y<4;y++){
+    if(tablero[x][y]==color&&tablero[x][y+1]==color&&tablero[x][y+2]==color&&tablero[x][y+3]==color){
+      score+=1000;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==color&&tablero[x][y+2]==color&&tablero[x][y+3]==' '){
+      score+=20;
+    }else if(tablero[x][y]==' '&&tablero[x][y+1]==color&&tablero[x][y+2]==color&&tablero[x][y+3]==color){
+        score+=20;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==' '&&tablero[x][y+2]==color&&tablero[x][y+3]==color){
+      score+=20;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==color&&tablero[x][y+2]==' '&&tablero[x][y+3]==color){
+      score+=20;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==color&&tablero[x][y+2]==' '&&tablero[x][y+3]==' '){
+        score+=5;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==' '&&tablero[x][y+2]==color&&tablero[x][y+3]==' '){
+      score+=5;
+    }else if(tablero[x][y]==color&&tablero[x][y+1]==' '&&tablero[x][y+2]==' '&&tablero[x][y+3]==color){
+      score+=5;
+    }else if(tablero[x][y]==' '&&tablero[x][y+1]==color&&tablero[x][y+2]==color&&tablero[x][y+3]==' '){
+      score+=5;
+    }else if(tablero[x][y]==' '&&tablero[x][y+1]==color&&tablero[x][y+2]==' '&&tablero[x][y+3]==color){
+      score+=5;
+    }else if(tablero[x][y]==' '&&tablero[x][y+1]==' '&&tablero[x][y+2]==color&&tablero[x][y+3]==color){
+      score+=5;
+    }
+  }
+}
+//score en Vertical
+for (x=0; x <=7; x++) {
+  for (y = 0; y < 3; y++) {
+    if(tablero[y][x]==color&&tablero[y+1][x]==color&&tablero[y+2][x]==color&&tablero[y+3][x]==color){
+      score+=1000;
+    }else if(tablero[y][x]==color&&tablero[y+1][x]==color&&tablero[y+2][x]==color&&tablero[y+3][x]==' '){
+      score+=20;
+    }else if(tablero[y][x]==color&&tablero[y+1][x]==color&&tablero[y+2][x]==' '&&tablero[y+3][x]==' '){
+      score+=5;
+    }
+  }
+}
+//Score en Diagonal
+int j;
+for(x = 0; x < 6; x++) {
+    for(j = 0; j < 7; j++) {
+        if (x+3 < 6 && j+3 < 7) {
+            if (tablero[x][j] == color && tablero[x+1][j+1] == color && tablero[x+2][j+2] == color && tablero[x+3][j+3] == color){
+                score+=1000;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == color && tablero[x+2][j+2] == color && tablero[x+3][j+3] == ' '){
+              score+=20;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == color && tablero[x+2][j+2] == ' ' && tablero[x+3][j+3] == color){
+              score+=20;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == ' ' && tablero[x+2][j+2] == color && tablero[x+3][j+3] == color){
+              score+=20;
+            }else if(tablero[x][j] == ' ' && tablero[x+1][j+1] == color && tablero[x+2][j+2] == color && tablero[x+3][j+3] == color){
+              score+=20;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == color && tablero[x+2][j+2] == ' ' && tablero[x+3][j+3] == ' '){
+              score+=5;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == ' ' && tablero[x+2][j+2] == color && tablero[x+3][j+3] == ' '){
+              score+=5;
+            }else if(tablero[x][j] == color && tablero[x+1][j+1] == ' ' && tablero[x+2][j+2] == ' ' && tablero[x+3][j+3] == color){
+              score+=5;
+            }else if(tablero[x][j] == ' ' && tablero[x+1][j+1] == ' ' && tablero[x+2][j+2] == color && tablero[x+3][j+3] == color){
+              score+=5;
+            }else if(tablero[x][j] == ' ' && tablero[x+1][j+1] == color && tablero[x+2][j+2] == ' ' && tablero[x+3][j+3] == color){
+              score+=5;
+            }else if(tablero[x][j] == ' ' && tablero[x+1][j+1] == color && tablero[x+2][j+2] == color && tablero[x+3][j+3] == ' '){
+              score+=5;
+            }
+        }
+    }
+}
+
+for(x = 0; x < 6; x++) {
+    for(j = 0; j < 7; j++) {
+        if (x+3 < 6 && j-3>=0) {
+          if (tablero[x][j] == color && tablero[x+1][j-1] == color && tablero[x+2][j-2] == color && tablero[x+3][j-3] == color){
+              score+=1000;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == color && tablero[x+2][j-2] == color && tablero[x+3][j-3] == ' '){
+            score+=20;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == color && tablero[x+2][j-2] == ' ' && tablero[x+3][j-3] == color){
+            score+=20;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == ' ' && tablero[x+2][j-2] == color && tablero[x+3][j-3] == color){
+            score+=20;
+          }else if(tablero[x][j] == ' ' && tablero[x+1][j-1] == color && tablero[x+2][j-2] == color && tablero[x+3][j-3] == color){
+            score+=20;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == color && tablero[x+2][j-2] == ' ' && tablero[x+3][j-3] == ' '){
+            score+=5;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == ' ' && tablero[x+2][j-2] == color && tablero[x+3][j-3] == ' '){
+            score+=5;
+          }else if(tablero[x][j] == color && tablero[x+1][j-1] == ' ' && tablero[x+2][j-2] == ' ' && tablero[x+3][j-3] == color){
+            score+=5;
+          }else if(tablero[x][j] == ' ' && tablero[x+1][j-1] == ' ' && tablero[x+2][j-2] == color && tablero[x+3][j-3] == color){
+            score+=5;
+          }else if(tablero[x][j] == ' ' && tablero[x+1][j-1] == color && tablero[x+2][j-2] == ' ' && tablero[x+3][j-3] == color){
+            score+=5;
+          }else if(tablero[x][j] == ' ' && tablero[x+1][j-1] == color && tablero[x+2][j-2] == color && tablero[x+3][j-3] == ' '){
+            score+=5;
+          }
+        }
+    }
+}
+
+
+return score;
 }
