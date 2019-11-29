@@ -214,10 +214,17 @@ int puntuarJugada(char tablero[6][7], char color){
             }else if(tablero[y][x]==color&&tablero[y+1][x]==color&&tablero[y+2][x]==color&&tablero[y+3][x]==' '){
                 score+=20;
             }else if(tablero[y][x]==color&&tablero[y+1][x]==color&&tablero[y+2][x]==' '&&tablero[y+3][x]==' '){
+                score+=10;
+            }else if(tablero[y][x]==color&&tablero[y+1][x]==' '&&tablero[y+2][x]==' '&&tablero[y+3][x]==' '){
                 score+=5;
+            }
+            if(tablero[y][x]==color&&x==3){
+                score+=2;
             }
         }
     }
+       
+    
 //Score en Diagonal
 int j;
 for(x = 0; x < 6; x++) {
